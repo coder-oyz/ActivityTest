@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.first_layout.*
 class FirstActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("FirstActivity",this.toString())
         setContentView(R.layout.first_layout)
         //var button:Button = findViewById(R.id.button)
         /*button.setOnClickListener {
@@ -54,14 +55,41 @@ class FirstActivity : AppCompatActivity() {
             startActivity(intent)
         }*/
 
-        //启动的activity销毁后有数据回传
+//        //启动的activity销毁后有数据回传
+//        button.setOnClickListener {
+//            val intent = Intent(this , SecondActivity::class.java)
+//            //使用startActivityForResult，请求码用于回调中判断数据来源
+//            startActivityForResult(intent,1)
+//        }
+
+        //测试standard 启动模式
+        //对于使用standard模式的Activity，系统不会在乎这个Activity是否已经在返回栈中存在，每次启动都会创建一个该Activity的新实例。
+        /*button.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }*/
+
+        //测试singleTop 启动模式
+        //当Activity的启动模式指定为singleTop，在启动Activity时如果发现返回栈的栈顶已经是该Activity，则认为可以直接使用它，不会再创建新的Activity实例。
+        /*button.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }*/
+
+        //测试singleInstance启动模式
+        Log.d("FirstActivity","Task id is $taskId")
+
         button.setOnClickListener {
-            val intent = Intent(this , SecondActivity::class.java)
-            //使用startActivityForResult，请求码用于回调中判断数据来源
-            startActivityForResult(intent,1)
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
         }
 
 
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("FirstActivity","onRestart")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
