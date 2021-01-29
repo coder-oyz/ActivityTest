@@ -25,7 +25,8 @@ class SecondActivity : BaseActivity() {
         Log.d("SecondActivity", this.toString())
         setContentView(R.layout.second_layout)
 
-        val person = intent.getSerializableExtra("person_data") as Person
+        //val person = intent.getSerializableExtra("person_data") as Person
+        val person = intent.getParcelableExtra<Person>("person_data") as Person
 
         val data1 = intent.getStringExtra("param1")
         val data2 = intent.getStringExtra("param2")
