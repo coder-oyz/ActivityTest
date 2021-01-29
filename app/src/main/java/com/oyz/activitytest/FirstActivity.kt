@@ -11,12 +11,21 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.first_layout.*
+import kotlinx.android.synthetic.main.second_layout.*
 
-class FirstActivity : AppCompatActivity() {
+class FirstActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("FirstActivity",this.toString())
         setContentView(R.layout.first_layout)
+
+        val person = Person()
+        person.name = "Tom"
+        person.age = 20
+        val intent = Intent(this, SecondActivity::class.java)
+        intent.putExtra("person_data", person)
+        startActivity(intent)
+
         //var button:Button = findViewById(R.id.button)
         /*button.setOnClickListener {
             //Toast.makeText(this, "You clicked Button" , Toast.LENGTH_SHORT).show()
@@ -77,11 +86,16 @@ class FirstActivity : AppCompatActivity() {
         }*/
 
         //测试singleInstance启动模式
-        Log.d("FirstActivity","Task id is $taskId")
+        /*Log.d("FirstActivity","Task id is $taskId")
 
         button.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
+        }*/
+
+        button.setOnClickListener {
+            //SecondActivity.actionStart(this, "data1", "data2")
+            Toast.makeText(this, "You clicked Button" , Toast.LENGTH_SHORT).show()
         }
 
 
